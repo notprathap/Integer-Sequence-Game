@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
 	private int count;
 	public GUIText countText;
 	public GUIText winText;
+	public Transform pickUpPrefab;
 
 	void Start()
 	{
 		count = 0;
 		SetCountText ();
 		winText.text = "";
+		Instantiate (pickUpPrefab, new Vector3 (-5f, 0.5f, 0), Quaternion.identity);
 	}
 
 	// Update is called once per frame
