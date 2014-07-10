@@ -20,9 +20,11 @@ public class PlayerController : MonoBehaviour
 		count = 0;
 		SetCountText ();
 		winText.text = "";
+		hydrateSequences();
+		IntegerSequence sequenceToInstantiate = this.sequences [0];
 		int randomNumber = 0;
-		for (int i = 0; i < 8; i++) {
-			randomNumber = Random.Range(0, 9999);
+		for (int i = 0; i < sequenceToInstantiate.Elements.Length; i++) {
+			randomNumber = sequenceToInstantiate.Elements[i];
 			if ((randomNumber >= 0) && (randomNumber < 10) ){
 				Instantiate (sphere, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
 			} else if ((randomNumber >= 10) && (randomNumber < 99) ){
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
 	void hydrateSequences()
 	{
+		sequences = new List<IntegerSequence>();
 		sequences.Add(new IntegerSequence("Natural Number", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
 		sequences.Add(new IntegerSequence("Lucas Number", new int[]{2, 1, 3, 4, 7, 11, 18, 29, 47, 76}));
 		sequences.Add(new IntegerSequence("Prime Number", new int[]{2, 3, 5, 7, 11, 13, 17, 19, 23, 29}));
@@ -149,6 +152,11 @@ public class PlayerController : MonoBehaviour
 		{
 			this.name = name;
 			this.elements = elements;
+		}
+
+		public int[] Elements
+		{
+			get { return this.elements;}
 		}
 	}
 
