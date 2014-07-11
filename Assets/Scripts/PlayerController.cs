@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 			randomNumber = sequenceToInstantiate.Elements[i];
 			if ((randomNumber >= 0) && (randomNumber < 10) ){
 				Instantiate (sphere, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
+				Debug.Log(decimalPointFinder(4, randomNumber)[0][1]);
+
 			} else if ((randomNumber >= 10) && (randomNumber < 99) ){
 				Instantiate (twoSidedCube, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
 			} else if ((randomNumber >= 100) && (randomNumber < 999) ){
@@ -63,6 +65,23 @@ public class PlayerController : MonoBehaviour
 		if (count >= 15) {
 			winText.text = "You Win!";
 		}
+	}
+
+	List<int[]> decimalPointFinder(int noOfDecimalPlaces, int number)
+	{
+		// the number at each decimal point
+		int placeNumber;
+
+		// the result map containing digit at each decimal point
+		List<int[]> decimalPointMap = new List<int[]>();
+
+		for (int i = 1; i <= noOfDecimalPlaces; i++) {
+			placeNumber = number % 10^i;
+			decimalPointMap.Add(new int[] {i, placeNumber});
+			number -= placeNumber * 10^(i-1); // getting rid of the unit altogether to faciliate further iterations
+		}
+
+		return decimalPointMap;
 	}
 
 	void hydrateSequences()
