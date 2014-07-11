@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 	public Transform threeSidedShape;
 	public Transform fourSidedCube;
 	private List<IntegerSequence> sequences;
+	private List<Color> colourMap;
 
 	void Start()
 	{
@@ -21,14 +22,15 @@ public class PlayerController : MonoBehaviour
 		SetCountText ();
 		winText.text = "";
 		hydrateSequences();
+		initColourMap ();
 		IntegerSequence sequenceToInstantiate = this.sequences [0];
 		int randomNumber = 0;
 		for (int i = 0; i < sequenceToInstantiate.Elements.Length; i++) {
 			randomNumber = sequenceToInstantiate.Elements[i];
 			if ((randomNumber >= 0) && (randomNumber < 10) ){
-				Instantiate (sphere, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
+				Transform singleDigitObject = (Transform)Instantiate (sphere, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
 				Debug.Log(decimalPointFinder(4, randomNumber)[0][1]);
-
+				singleDigitObject.gameObject.renderer.material.color = colourMap[randomNumber];
 			} else if ((randomNumber >= 10) && (randomNumber < 99) ){
 				Instantiate (twoSidedCube, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
 			} else if ((randomNumber >= 100) && (randomNumber < 999) ){
@@ -82,6 +84,21 @@ public class PlayerController : MonoBehaviour
 		}
 
 		return decimalPointMap;
+	}
+
+	void initColourMap()
+	{
+		this.colourMap = new List<Color>();
+		colourMap.Add (Color.white);
+		colourMap.Add (Color.black);
+		colourMap.Add (Color.red);
+		colourMap.Add (Color.blue);
+		colourMap.Add (Color.yellow);
+		colourMap.Add (Color.cyan);
+		colourMap.Add (Color.grey);
+		colourMap.Add (Color.magenta);
+		colourMap.Add (Color.green);
+		colourMap.Add (new Color(0.5f, 1, 0.2f));
 	}
 
 	void hydrateSequences()
