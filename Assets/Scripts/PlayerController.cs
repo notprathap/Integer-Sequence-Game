@@ -43,9 +43,12 @@ public class PlayerController : MonoBehaviour
 				int noAtUnit = decimalPointFinder(3, randomNumber)[0][1];
 				int noAtTens = decimalPointFinder(3, randomNumber)[1][1];
 				int noAtHundreds = decimalPointFinder(3, randomNumber)[2][1];
-				threeDigitObject.FindChild("Vertical").renderer.material.color = colourMap[noAtUnit];
-				threeDigitObject.FindChild("Horizontal").renderer.material.color = colourMap[noAtTens];
-				threeDigitObject.FindChild("Lateral").renderer.material.color = colourMap[noAtHundreds];
+				threeDigitObject.FindChild("Horizontal").FindChild("Front").renderer.material.color = colourMap[noAtUnit];
+				threeDigitObject.FindChild("Horizontal").FindChild("Back").renderer.material.color = colourMap[noAtUnit];
+				threeDigitObject.FindChild("Lateral Left").FindChild("Front").renderer.material.color = colourMap[noAtTens];
+				threeDigitObject.FindChild("Lateral Left").FindChild("Back").renderer.material.color = colourMap[noAtTens];
+				threeDigitObject.FindChild("Lateral Right").FindChild("Front").renderer.material.color = colourMap[noAtHundreds];
+				threeDigitObject.FindChild("Lateral Right").FindChild("Back").renderer.material.color = colourMap[noAtHundreds];
 			} else {
 				Transform fourDigitObject = (Transform)Instantiate (fourSidedCube, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
 				int noAtUnit = decimalPointFinder(4, randomNumber)[0][1];

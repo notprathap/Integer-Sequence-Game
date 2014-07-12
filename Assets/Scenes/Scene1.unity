@@ -145,7 +145,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4e822d46150c1244891e05231c62565, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -209,6 +209,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 548922093}
+  - 23: {fileID: 548922094}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -232,6 +233,26 @@ Transform:
   - {fileID: 1813781664}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!23 &548922094
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548922092}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: a4e822d46150c1244891e05231c62565, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1 &614496547
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +283,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4e822d46150c1244891e05231c62565, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -496,7 +517,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 82ab1ea113e38d340b46f5577e3164a6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -799,7 +820,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4e822d46150c1244891e05231c62565, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -993,7 +1014,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4e822d46150c1244891e05231c62565, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1057,7 +1078,7 @@ MonoBehaviour:
   pickUpPrefab: {fileID: 400000, guid: c5902dc6636d1b747a4e45cc961f378c, type: 2}
   sphere: {fileID: 400000, guid: 47a9ea2f6bc4092438b168b1628aaab4, type: 2}
   twoSidedCube: {fileID: 400000, guid: 31affeb50c4d0424ca157c562abd1898, type: 2}
-  threeSidedShape: {fileID: 400042, guid: b13b0dacee81dad48adcdd56312f875c, type: 2}
+  threeSidedShape: {fileID: 400028, guid: b13b0dacee81dad48adcdd56312f875c, type: 2}
   fourSidedCube: {fileID: 400000, guid: 7494719f53ce34244b41a73fcc18f3ac, type: 2}
 --- !u!54 &1994400595
 Rigidbody:
