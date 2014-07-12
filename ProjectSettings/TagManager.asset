@@ -4,6 +4,8 @@
 TagManager:
   tags:
   - PickUp
+  - 2sidedBack
+  - 2sidedFront
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

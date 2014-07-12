@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -23,20 +23,39 @@ public class PlayerController : MonoBehaviour
 		winText.text = "";
 		hydrateSequences();
 		initColourMap ();
-		IntegerSequence sequenceToInstantiate = this.sequences [0];
+		IntegerSequence sequenceToInstantiate = this.sequences [5];
 		int randomNumber = 0;
 		for (int i = 0; i < sequenceToInstantiate.Elements.Length; i++) {
 			randomNumber = sequenceToInstantiate.Elements[i];
+			//Debug.Log(randomNumber);
 			if ((randomNumber >= 0) && (randomNumber < 10) ){
-				Transform singleDigitObject = (Transform)Instantiate (sphere, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
-				Debug.Log(decimalPointFinder(4, randomNumber)[0][1]);
+				Transform singleDigitObject = (Transform)Instantiate (sphere, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
+				//Debug.Log(decimalPointFinder(4, randomNumber)[0][1]);
 				singleDigitObject.gameObject.renderer.material.color = colourMap[randomNumber];
 			} else if ((randomNumber >= 10) && (randomNumber < 99) ){
-				Instantiate (twoSidedCube, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
+				Transform doubleDigitObject = (Transform)Instantiate (twoSidedCube, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
+				int noAtUnit = decimalPointFinder(2, randomNumber)[0][1];
+				int noAtTens = decimalPointFinder(2, randomNumber)[1][1];
+				doubleDigitObject.FindChild("Back").renderer.material.color = colourMap[noAtUnit];
+				doubleDigitObject.FindChild("Front").renderer.material.color = colourMap[noAtTens];
 			} else if ((randomNumber >= 100) && (randomNumber < 999) ){
-				Instantiate (threeSidedShape, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
+				Transform threeDigitObject = (Transform)Instantiate (threeSidedShape, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
+				int noAtUnit = decimalPointFinder(3, randomNumber)[0][1];
+				int noAtTens = decimalPointFinder(3, randomNumber)[1][1];
+				int noAtHundreds = decimalPointFinder(3, randomNumber)[2][1];
+				threeDigitObject.FindChild("Vertical").renderer.material.color = colourMap[noAtUnit];
+				threeDigitObject.FindChild("Horizontal").renderer.material.color = colourMap[noAtTens];
+				threeDigitObject.FindChild("Lateral").renderer.material.color = colourMap[noAtHundreds];
 			} else {
-				Instantiate (fourSidedCube, new Vector3 (Random.Range(-10,10), 0.5f, Random.Range(-10,10)), Quaternion.identity);
+				Transform fourDigitObject = (Transform)Instantiate (fourSidedCube, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
+				int noAtUnit = decimalPointFinder(4, randomNumber)[0][1];
+				int noAtTens = decimalPointFinder(4, randomNumber)[1][1];
+				int noAtHundreds = decimalPointFinder(4, randomNumber)[2][1];
+				int noAtThousands = decimalPointFinder(4, randomNumber)[3][1];
+				fourDigitObject.FindChild("Back").renderer.material.color = colourMap[noAtUnit];
+				fourDigitObject.FindChild("Front").renderer.material.color = colourMap[noAtTens];
+				fourDigitObject.FindChild("Right").renderer.material.color = colourMap[noAtHundreds];
+				fourDigitObject.FindChild("Left").renderer.material.color = colourMap[noAtThousands];
 			}
 
 		}
@@ -78,9 +97,9 @@ public class PlayerController : MonoBehaviour
 		List<int[]> decimalPointMap = new List<int[]>();
 
 		for (int i = 1; i <= noOfDecimalPlaces; i++) {
-			placeNumber = number % 10^i;
-			decimalPointMap.Add(new int[] {i, placeNumber});
-			number -= placeNumber * 10^(i-1); // getting rid of the unit altogether to faciliate further iterations
+			placeNumber = number % (int)Mathf.Pow( 10, i);
+			decimalPointMap.Add(new int[] {i, placeNumber / (int)Mathf.Pow( 10, i-1)});
+			number -= placeNumber; // getting rid of the unit altogether to faciliate further iterations
 		}
 
 		return decimalPointMap;
@@ -98,7 +117,7 @@ public class PlayerController : MonoBehaviour
 		colourMap.Add (Color.grey);
 		colourMap.Add (Color.magenta);
 		colourMap.Add (Color.green);
-		colourMap.Add (new Color(0.5f, 1, 0.2f));
+		colourMap.Add (new Color(0.5f, 0.3f, 0.2f));
 	}
 
 	void hydrateSequences()
