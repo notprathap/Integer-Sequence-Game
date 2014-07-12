@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 	private List<Color> colourMap;
 	private IntegerSequence currentSequence;
 	private int expectedIndex;
+	private int levelToLoad = 0;
 
 	void Start()
 	{
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
 		winText.text = "";
 		hydrateSequences();
 		initColourMap ();
-		currentSequence = this.sequences [5];
+		currentSequence = this.sequences [levelToLoad];
 		expectedIndex = 0;
 		int randomNumber = 0;
 		for (int i = 0; i < currentSequence.Elements.Length; i++) {
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
 			int collectedNumber = other.gameObject.GetComponent<CubeRotator>().number;
 			if (collectedNumber != currentSequence.Elements[expectedIndex]) {
 				// wrong order of collection
-				//reset
+				reset();
 			} else {
 				// right order of collection; check for level complete or update expected number
 				Destroy(other.gameObject);
@@ -97,18 +98,24 @@ public class PlayerController : MonoBehaviour
 					loadNextLevel();
 				}
 			}
-			//Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
 		}
 	}
 
 	void reset()
 	{
-
+		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("PickUp");
+		foreach (GameObject thisObject in gameObjects) {
+			if (thisObject.activeInHierarchy){
+				Destroy(thisObject);
+			}
+		}
+		Start ();
 	}
 
 	void loadNextLevel()
 	{
-
+		this.levelToLoad++;
+		Start ();
 	}
 
 	void SetCountText()
