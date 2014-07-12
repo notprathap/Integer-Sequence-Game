@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 	public Transform fourSidedCube;
 	private List<IntegerSequence> sequences;
 	private List<Color> colourMap;
+	private IntegerSequence currentSequence;
+	private int expectedIndex;
 
 	void Start()
 	{
@@ -22,10 +24,11 @@ public class PlayerController : MonoBehaviour
 		winText.text = "";
 		hydrateSequences();
 		initColourMap ();
-		IntegerSequence sequenceToInstantiate = this.sequences [5];
+		currentSequence = this.sequences [5];
+		expectedIndex = 0;
 		int randomNumber = 0;
-		for (int i = 0; i < sequenceToInstantiate.Elements.Length; i++) {
-			randomNumber = sequenceToInstantiate.Elements[i];
+		for (int i = 0; i < currentSequence.Elements.Length; i++) {
+			randomNumber = currentSequence.Elements[i];
 			//Debug.Log(randomNumber);
 			if ((randomNumber >= 0) && (randomNumber < 10) ){
 				Transform singleDigitObject = (Transform)Instantiate (sphere, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
@@ -79,25 +82,33 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		switch (other.gameObject.name) 
-		{
-		case "Sphere(Clone)":
-			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
-			break;
-		case "2sided Cube(Clone)":
-			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
-			break;
-		case "3sided shape(Clone)":
-			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
-			break;
-		case "4sided Cube(Clone)":
-			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
-			break;
+		if (other.gameObject.GetComponent<CubeRotator> () != null) {
+			int collectedNumber = other.gameObject.GetComponent<CubeRotator>().number;
+			if (collectedNumber != currentSequence.Elements[expectedIndex]) {
+				// wrong order of collection
+				//reset
+			} else {
+				// right order of collection; check for level complete or update expected number
+				Destroy(other.gameObject);
+				count++;
+				SetCountText();
+				expectedIndex++;
+				if (expectedIndex >= currentSequence.Elements.Length) {
+					loadNextLevel();
+				}
+			}
+			//Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
 		}
+	}
 
-		Destroy(other.gameObject);
-		count++;
-		SetCountText();
+	void reset()
+	{
+
+	}
+
+	void loadNextLevel()
+	{
+
 	}
 
 	void SetCountText()
