@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 	private int count;
 	public GUIText countText;
 	public GUIText winText;
-	public Transform pickUpPrefab;
 	public Transform sphere;
 	public Transform twoSidedCube;
 	public Transform threeSidedShape;
@@ -32,12 +31,14 @@ public class PlayerController : MonoBehaviour
 				Transform singleDigitObject = (Transform)Instantiate (sphere, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
 				//Debug.Log(decimalPointFinder(4, randomNumber)[0][1]);
 				singleDigitObject.gameObject.renderer.material.color = colourMap[randomNumber];
+				singleDigitObject.gameObject.GetComponent<CubeRotator>().number = randomNumber;
 			} else if ((randomNumber >= 10) && (randomNumber < 99) ){
 				Transform doubleDigitObject = (Transform)Instantiate (twoSidedCube, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
 				int noAtUnit = decimalPointFinder(2, randomNumber)[0][1];
 				int noAtTens = decimalPointFinder(2, randomNumber)[1][1];
 				doubleDigitObject.FindChild("Back").renderer.material.color = colourMap[noAtUnit];
 				doubleDigitObject.FindChild("Front").renderer.material.color = colourMap[noAtTens];
+				doubleDigitObject.gameObject.GetComponent<CubeRotator>().number = randomNumber;
 			} else if ((randomNumber >= 100) && (randomNumber < 999) ){
 				Transform threeDigitObject = (Transform)Instantiate (threeSidedShape, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
 				int noAtUnit = decimalPointFinder(3, randomNumber)[0][1];
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
 				threeDigitObject.FindChild("Lateral Left").FindChild("Back").renderer.material.color = colourMap[noAtTens];
 				threeDigitObject.FindChild("Lateral Right").FindChild("Front").renderer.material.color = colourMap[noAtHundreds];
 				threeDigitObject.FindChild("Lateral Right").FindChild("Back").renderer.material.color = colourMap[noAtHundreds];
+				threeDigitObject.gameObject.GetComponent<CubeRotator>().number = randomNumber;
 			} else {
 				Transform fourDigitObject = (Transform)Instantiate (fourSidedCube, new Vector3 (Random.Range(-9.5f,9.5f), 0.5f, Random.Range(-9.5f,9.5f)), Quaternion.identity);
 				int noAtUnit = decimalPointFinder(4, randomNumber)[0][1];
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
 				fourDigitObject.FindChild("Front").renderer.material.color = colourMap[noAtTens];
 				fourDigitObject.FindChild("Right").renderer.material.color = colourMap[noAtHundreds];
 				fourDigitObject.FindChild("Left").renderer.material.color = colourMap[noAtThousands];
+				fourDigitObject.gameObject.GetComponent<CubeRotator>().number = randomNumber;
 			}
 
 		}
@@ -76,11 +79,25 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		//if (other.gameObject.tag == "PickUp") {
-			other.gameObject.SetActive (false);
-			count++;
-			SetCountText();
-		//}
+		switch (other.gameObject.name) 
+		{
+		case "Sphere(Clone)":
+			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
+			break;
+		case "2sided Cube(Clone)":
+			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
+			break;
+		case "3sided shape(Clone)":
+			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
+			break;
+		case "4sided Cube(Clone)":
+			Debug.Log (other.gameObject.GetComponent<CubeRotator>().number);
+			break;
+		}
+
+		Destroy(other.gameObject);
+		count++;
+		SetCountText();
 	}
 
 	void SetCountText()
