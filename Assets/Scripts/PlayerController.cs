@@ -139,6 +139,11 @@ public class PlayerController : MonoBehaviour
 	void loadNextLevel()
 	{
 		this.levelToLoad++;
+		if (levelToLoad > 71) {
+			winText.text = "What a champ!";
+			countText.text = "";
+			livesText.text = "";
+		}
 		Start ();
 	}
 
