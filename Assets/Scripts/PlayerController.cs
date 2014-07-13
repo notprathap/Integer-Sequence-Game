@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	private int count;
 	public GUIText countText;
 	public GUIText winText;
+	public GUIText livesText;
 	public Transform sphere;
 	public Transform twoSidedCube;
 	public Transform threeSidedShape;
@@ -18,12 +19,14 @@ public class PlayerController : MonoBehaviour
 	private int expectedIndex;
 	private int levelToLoad = 0;
 	private bool levelComplete;
+	private int noOfLivesLeft = 20;
 
 	void Start()
 	{
 		count = 0;
 		levelComplete = false;
 		countText.text = "Sequence Collected: ";
+		livesText.text = "Lives left: " + noOfLivesLeft.ToString();
 		winText.text = "";
 		hydrateSequences();
 		initColourMap ();
@@ -113,7 +116,15 @@ public class PlayerController : MonoBehaviour
 				Destroy(thisObject);
 			}
 		}
-		Start ();
+		noOfLivesLeft--;
+		if (noOfLivesLeft > 0) {
+			Start ();
+		} else {
+			// Game Over
+			winText.text = "Game Over";
+			countText.text = "";
+			livesText.text = "";
+		}
 	}
 
 	void OnGUI()
