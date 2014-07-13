@@ -17,11 +17,13 @@ public class PlayerController : MonoBehaviour
 	private IntegerSequence currentSequence;
 	private int expectedIndex;
 	private int levelToLoad = 0;
+	private bool levelComplete;
 
 	void Start()
 	{
 		count = 0;
-		SetCountText ();
+		levelComplete = false;
+		countText.text = "Sequence Collected: ";
 		winText.text = "";
 		hydrateSequences();
 		initColourMap ();
@@ -92,10 +94,12 @@ public class PlayerController : MonoBehaviour
 				// right order of collection; check for level complete or update expected number
 				Destroy(other.gameObject);
 				count++;
-				SetCountText();
+				SetCountText(collectedNumber);
 				expectedIndex++;
 				if (expectedIndex >= currentSequence.Elements.Length) {
-					loadNextLevel();
+					winText.text = "Congratulations! You have mastered the " + currentSequence.Name;
+					//loadNextLevel();
+					levelComplete = true;
 				}
 			}
 		}
@@ -112,15 +116,24 @@ public class PlayerController : MonoBehaviour
 		Start ();
 	}
 
+	void OnGUI()
+	{
+		if (levelComplete) {
+			if (GUI.Button(new Rect((Screen.width/2) - 50,(Screen.height/2) - 25,100,50), "Continue")){
+				loadNextLevel();
+			}
+		}
+	}
+
 	void loadNextLevel()
 	{
 		this.levelToLoad++;
 		Start ();
 	}
 
-	void SetCountText()
+	void SetCountText(int collectedNumber)
 	{
-		countText.text = "Count: " + count.ToString();
+		countText.text += collectedNumber.ToString() + ", ";
 		if (count >= 15) {
 			winText.text = "You Win!";
 		}
@@ -250,6 +263,11 @@ public class PlayerController : MonoBehaviour
 		public int[] Elements
 		{
 			get { return this.elements;}
+		}
+
+		public string Name
+		{
+			get { return this.name;}
 		}
 	}
 
