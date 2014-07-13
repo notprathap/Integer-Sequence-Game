@@ -5,6 +5,8 @@ The objective of the game is to solve the integer sequences generated in the gam
 
 [Here's the hosted game]
 
+And [here's the cheat sheet]
+
 Good luck!
 
 Tech
@@ -20,3 +22,4 @@ MIT
 
 [Here's the hosted game]:http://www.elearningmag.info/notprathap/integersequencegame/
 [this tutorial]:http://unity3d.com/learn/tutorials/projects/roll-a-ball
+[here's the cheat sheet]:http://en.wikipedia.org/wiki/List_of_OEIS_sequences
