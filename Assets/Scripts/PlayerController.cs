@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	public GUIText countText;
 	public GUIText winText;
 	public GUIText livesText;
+	public GUIText levelText;
 	public Transform sphere;
 	public Transform twoSidedCube;
 	public Transform threeSidedShape;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
 		levelComplete = false;
 		countText.text = "Sequence Collected: ";
 		livesText.text = "Lives left: " + noOfLivesLeft.ToString();
+		levelText.text = "Level " + (levelToLoad + 1).ToString () + " of 71";
 		winText.text = "";
 		hydrateSequences();
 		initColourMap ();
