@@ -102,6 +102,7 @@ Transform:
   - {fileID: 1455219499}
   - {fileID: 1558313563}
   - {fileID: 1367447110}
+  - {fileID: 1536663593}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!1 &125430337
@@ -558,6 +559,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 46296347}
   m_RootOrder: 0
+--- !u!1 &1536663592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1536663593}
+  - 132: {fileID: 1536663594}
+  m_Layer: 0
+  m_Name: Level Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536663593
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536663592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 46296347}
+  m_RootOrder: 3
+--- !u!132 &1536663594
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536663592}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: Gui Text
+  m_Anchor: 1
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: -10}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &1558313562
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +994,7 @@ MonoBehaviour:
   countText: {fileID: 1455219498}
   winText: {fileID: 1558313564}
   livesText: {fileID: 1367447111}
+  levelText: {fileID: 1536663594}
   sphere: {fileID: 400000, guid: 47a9ea2f6bc4092438b168b1628aaab4, type: 2}
   twoSidedCube: {fileID: 400000, guid: 31affeb50c4d0424ca157c562abd1898, type: 2}
   threeSidedShape: {fileID: 400028, guid: b13b0dacee81dad48adcdd56312f875c, type: 2}

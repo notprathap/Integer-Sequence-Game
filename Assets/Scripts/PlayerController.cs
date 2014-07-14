@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 		levelComplete = false;
 		countText.text = "Sequence Collected: ";
 		livesText.text = "Lives left: " + noOfLivesLeft.ToString();
-		levelText.text = "Level " + (levelToLoad + 1).ToString () + " of 71";
+		levelText.text = "Level " + (levelToLoad + 1).ToString () + " of 75";
 		winText.text = "";
 		hydrateSequences();
 		initColourMap ();
@@ -118,7 +118,10 @@ public class PlayerController : MonoBehaviour
 				Destroy(thisObject);
 			}
 		}
-		noOfLivesLeft--;
+		if (levelToLoad >= 4) {
+			noOfLivesLeft--;
+		}
+
 		if (noOfLivesLeft > 0) {
 			Start ();
 		} else {
@@ -192,6 +195,10 @@ public class PlayerController : MonoBehaviour
 	void hydrateSequences()
 	{
 		sequences = new List<IntegerSequence>();
+		sequences.Add(new IntegerSequence("Zero Number", new int[]{0}));
+		sequences.Add(new IntegerSequence("Binary Sequence", new int[]{0,1,0,1}));
+		sequences.Add(new IntegerSequence("Random Sequence", new int[]{1, 8, 3, 2, 5}));
+		sequences.Add(new IntegerSequence("Test Sequence. Now, the real fun begins!", new int[]{1, 2, 3, 4, 5, 6}));
 		sequences.Add(new IntegerSequence("Natural Number", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
 		sequences.Add(new IntegerSequence("Lucas Number", new int[]{2, 1, 3, 4, 7, 11, 18, 29, 47, 76}));
 		sequences.Add(new IntegerSequence("Prime Number", new int[]{2, 3, 5, 7, 11, 13, 17, 19, 23, 29}));
